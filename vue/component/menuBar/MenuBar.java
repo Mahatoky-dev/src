@@ -10,13 +10,15 @@ import vue.interfaces.menuBar.IMenuBar;
 
 public class MenuBar extends JPanel implements IMenuBar {
 
-    private JButton restarButton = new JButton("Restart");
     private TimeLabel timeLabel = new TimeLabel();
+    private JButton restarButton = new JButton("Restart");
+    private JButton buildTexButton = new JButton("New Text");
 
     public MenuBar() {
         super(new FlowLayout());
         this.add(timeLabel);
         this.add(restarButton);
+        this.add(buildTexButton);
     }
 
     
@@ -31,5 +33,12 @@ public class MenuBar extends JPanel implements IMenuBar {
     @Override
     public void refreshTime(int s) {
         this.timeLabel.refreshTime(s);
+    }
+
+
+
+    @Override
+    public void addActionListenerForBuidTextButton(ActionListener e) {
+        this.buildTexButton.addActionListener(e);
     }
 }

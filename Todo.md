@@ -44,3 +44,21 @@ Le .
 A retenir : La statistique elle ,s'actualise au bon momment .
 
 comit
+
+## foctionnalité suivante :
+possibilité de generer du texte .
+
+- ajouté un boutton generé texte 
+qui va generer une texte aleatoire.
+Cette texte va etre utilises dans le teste.
+
+### todo :
+- ajout du boutton generer dans vue.MenuBar
+    - ajout dans la classe menu bar
+    - ajout de focntion addListner dans l'interface
+- creation d'une classe permetant de generer du texte
+    - recuperer des words avec le language.
+    - cree une fonction getRandomText(langage,nb d'word)
+- creation du listner qui ,sur le clique du boutton va :
+    - gerer le texe
+    - le metre dans l'affichage
