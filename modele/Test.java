@@ -1,11 +1,10 @@
 package modele;
 
-import javax.swing.Timer;
+import modele.interfaces.Restartable;
 
-public class Test {
+public class Test implements Restartable {
 
     private int duration = 0;
-    private Timer timer;
     private String letterTaped;
     private String letterDefaut;
 
@@ -13,9 +12,6 @@ public class Test {
     public Test(String letterDefaut) {
         this.letterDefaut = letterDefaut;
         this.letterTaped = "";
-        this.timer = new Timer(1000, e -> {
-            duration += 1;
-        });
     }
 
     public void addLetterTapped(String letter) {
@@ -36,20 +32,22 @@ public class Test {
         return false;
     }
 
-    public void restart() {
-        this.duration = 0;
-        this.letterTaped = "";
-        if(timer.isRunning()) {
-            this.timer.stop();
-        }
-    }
-
     public boolean isFinish() {
-        return this.letterDefaut.length() == this.letterTaped.length() ;
+        return this.letterDefaut.length() == this.letterTaped.length();
     }
 
     public boolean firstLetterTaped() {
         return letterTaped.length() == 1;
+    }
+
+    public void incrementDuration() {
+        this.duration++;
+    }
+
+    @Override
+    public void restart() {
+        this.duration = 0;
+        this.letterTaped = "";
     }
 
     // setter
@@ -66,11 +64,11 @@ public class Test {
         return letterDefaut;
     }
 
-    public Timer getTimer() {
-        return timer;
-    }
-
     public int getDuration() {
         return duration;
+    }
+
+    public void setLetterDefaut(String letterDefaut) {
+        this.letterDefaut = letterDefaut;
     }
 }

@@ -1,23 +1,20 @@
 package controleur;
 
 import modele.Test;
-import vue.TestPanel;
+import vue.interfaces.ITestView;
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class TextListener implements KeyListener {
+public class CletterTaped implements KeyListener {
 
     private Test test;
-    private TestPanel testPanel;
+    private ITestView testView;
 
-    public TextListener(Test test, TestPanel testPanel) {
+    public CletterTaped(Test test, ITestView testView) {
         this.test = test;
-        this.testPanel = testPanel;
-        testPanel.setFocusable(true);
-        this.testPanel.requestFocusInWindow();
-        testPanel.addKeyListener(this);
+        this.testView = testView;
+        testView.addKeyListenerForTextTaping(this);
     }
 
     private void checkKeyTyped(KeyEvent e) {
@@ -26,11 +23,11 @@ public class TextListener implements KeyListener {
             test.addLetterTapped(charTaped);
             int lastIndexTaped = test.getLetterTaped().length() - 1;
             if (test.letterIsValideAt(lastIndexTaped)) {
-                testPanel.changeColorAt(lastIndexTaped, Color.green);
+                testView.changeLetterAtIndexToValide(lastIndexTaped);
             } else {
-                testPanel.changeColorAt(lastIndexTaped, Color.red);
+                testView.changeLetterAtIndexToUnvalide(lastIndexTaped);
             }
-            testPanel.repaint();
+            testView.refresh();
         }
     }
 

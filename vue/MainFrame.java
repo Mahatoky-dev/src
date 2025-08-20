@@ -3,45 +3,49 @@ package vue;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class MainFrame extends JFrame {
-    
-    private TestPanel testPanel;
-    private ResultatPanel resultatPanel;
-    private JButton restarButton;
+import vue.component.menuBar.MenuBar;
+import vue.component.StatView;
+import vue.component.TestView;
 
-    public MainFrame(TestPanel testPanel) {
+public class MainFrame extends JFrame {
+
+    private TestView testView;
+    private MenuBar menuBar;
+    private StatView statView;
+
+    public MainFrame(TestView testView) {
         this.setSize(new Dimension(400,500));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-        this.testPanel = testPanel;
 
+        //init component
         JPanel maiPanel = new JPanel(new BorderLayout());
-        maiPanel.add(testPanel,BorderLayout.CENTER);
+        maiPanel.add(testView,BorderLayout.CENTER);
 
-        this.resultatPanel = new ResultatPanel();
-        maiPanel.add(resultatPanel,BorderLayout.SOUTH);
+        this.menuBar = new MenuBar();
+        maiPanel.add(menuBar,BorderLayout.NORTH);
 
-        this.restarButton = new JButton("Reset");
-        maiPanel.add(restarButton,BorderLayout.EAST);
+        //stat
+        this.statView = new StatView();
+        maiPanel.add(statView,BorderLayout.SOUTH);
 
         this.add(maiPanel);
-
         this.setVisible(true);
     }
 
-    public TestPanel getTestPanel() {
-        return testPanel;
+    //getter
+    public TestView getTestView() {
+        return testView;
     }
 
-    public ResultatPanel getResultatPanel() {
-        return resultatPanel;
+    public MenuBar getMenuBarTest() {
+        return menuBar;
     }
 
-    public JButton getRestarButton() {
-        return restarButton;
+    public StatView getStatView() {
+        return statView;
     }
 }
