@@ -1,4 +1,5 @@
 package controleur.menuBar;
+import controleur.Listener.BuildTextListener;
 import controleur.Listener.RestartListener;
 import controleur.Listener.TimerControleur;
 import modele.Test;
@@ -13,6 +14,8 @@ public class CmenuBar {
         TimerControleur timerControleur = new TimerControleur(test, testView, menuBar);
 
         //controluer le bouton restart
-        menuBar.addActionListnerForButtonRestart(new RestartListener(test, testView, timerControleur.getTimer(),menuBar,statView));
+        RestartListener restartListener = new RestartListener(test, testView, timerControleur.getTimer(),menuBar,statView);
+        menuBar.addActionListnerForButtonRestart(restartListener);
+        menuBar.addActionListenerForBuidTextButton(new BuildTextListener(test, restartListener));
     }
 }

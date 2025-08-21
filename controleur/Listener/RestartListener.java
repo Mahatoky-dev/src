@@ -9,7 +9,6 @@ import modele.Test;
 import vue.interfaces.ITestView;
 import vue.interfaces.menuBar.TimeRefreshable;
 import vue.interfaces.stat.IstatView;
-import vue.interfaces.stat.IstatView;
 
 public class RestartListener implements ActionListener {
 
@@ -19,7 +18,8 @@ public class RestartListener implements ActionListener {
     private TimeRefreshable timeRefreshable;
     private IstatView statView;
 
-    public RestartListener(Test test, ITestView testView, Timer timer,TimeRefreshable timeRefreshable,IstatView statView) {
+    public RestartListener(Test test, ITestView testView, Timer timer, TimeRefreshable timeRefreshable,
+            IstatView statView) {
         this.test = test;
         this.testView = testView;
         this.timer = timer;
@@ -27,12 +27,18 @@ public class RestartListener implements ActionListener {
         this.statView = statView;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
+    public void restartAll() {
         this.test.restart();
         this.testView.reset();
         timer.stop();
         statView.reset();
         timeRefreshable.refreshTime(test.getDuration());
+        testView.setLetters(test.getLetterDefaut());
+        statView.displayCheckErrorButton(false);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        restartAll();
     }
 }
